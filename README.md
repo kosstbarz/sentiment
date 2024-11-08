@@ -1,5 +1,4 @@
-# Sentiment
-sentiment analysis
+# Sentiment analysis
 
 This repository contains results of comparison of two models for sentiment analysis task.
 The code can be run locally.
@@ -19,6 +18,9 @@ Install requirements
 ```
 pip install -r requirements.txt
 ```
+Requirements installation can fail due to llama-cpp-python.
+In this case check github readme https://github.com/abetlen/llama-cpp-python?tab=readme-ov-file
+
 Load models to the `models` directory
 
 ## Reproduce experiments
