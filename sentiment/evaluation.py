@@ -114,6 +114,7 @@ def evaluate(model_path: str, template: str, dataset, config: dict = None, parse
         template: jinja2 template of the prompt
         dataset: Huggingface dataset with 'review' and 'label'
         config: Dict with generation parameters like temperature
+        parse: Parser name. Possible values are `int`, `json`, `label` and `lines`.
         debug: If True, additional prints are activated
         n_ctx: Context length
     """
