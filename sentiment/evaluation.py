@@ -12,6 +12,7 @@ class Result(enum.Enum):
 
 
 def _parse_response_int(response: dict, debug) -> Result:
+    """Parser which expects only one symbol - 0 or 1"""
     if "choices" not in response:
         return Result.ERROR
     if "text" not in response["choices"][0]:
@@ -28,6 +29,7 @@ def _parse_response_int(response: dict, debug) -> Result:
 
 
 def _parse_response_label(response: dict, debug) -> Result:
+    """Parser which expects only one word - POSITIVE or NEGATIVE"""
     if "choices" not in response:
         return Result.ERROR
     if "text" not in response["choices"][0]:
@@ -44,6 +46,7 @@ def _parse_response_label(response: dict, debug) -> Result:
 
 
 def _parse_response_json(response: dict, debug) -> Result:
+    """Parser which expects json with field 'label'"""
     if "choices" not in response:
         return Result.ERROR
     if "text" not in response["choices"][0]:
@@ -66,6 +69,7 @@ def _parse_response_json(response: dict, debug) -> Result:
 
 
 def _parse_response_lines(response: dict, debug) -> Result:
+    """Parser which expects several lines of response with one line `Label: ...`"""
     if "choices" not in response:
         return Result.ERROR
     if "text" not in response["choices"][0]:
@@ -104,7 +108,7 @@ def _generate_example(model, template: jinja2.Template, example: dict, config: d
 def evaluate(model_path: str, template: str, dataset, config: dict = None, parse: str = "int",
              debug=False, n_ctx: int = 2048) -> dict:
     """Entry point to the evaluation framework.
-    We suppose balanced dataset during statistics calculations.
+    Make detection for each example from the dataset and returns dict with statistics.
     Args:
         model_path: path to .gguf file
         template: jinja2 template of the prompt
